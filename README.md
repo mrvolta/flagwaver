@@ -9,7 +9,7 @@ Also, WebSocket-IO was implemented to change the user interface based on the ser
 
 This code can be uploaded to raspberry pi via SSH or can be used on Windows/Linux PCs
 
-![alt text](https://github.com/mrvolta/flagwaver/master/flagwaver/flagnotify.png)
+![alt text](https://github.com/mrvolta/flagwaver/blob/master/flagwaver/flagnotify.png)
 
 # **Installation**
 
