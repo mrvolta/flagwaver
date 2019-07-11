@@ -59,6 +59,8 @@ Detailed.py - Implementing the same previous concept, except you can actually vi
 
 Simulated.py - Here you can run the code without the need for arduino serial communication to be active , because it's simulating the data
 
+![alt text](https://github.com/mrvolta/flagwaver/blob/master/flagwaver/potschematic.png)
+
 # **Arduino Code**
 
 ```
