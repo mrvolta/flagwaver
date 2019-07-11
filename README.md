@@ -19,6 +19,7 @@ sudo apt-get update -y
 sudo apt-get install build-essential tk-dev libncurses5-dev libncursesw5-dev libreadline6-dev libdb5.3-dev libgdbm-dev libsqlite3-dev libssl-dev libbz2-dev libexpat1-dev liblzma-dev zlib1g-dev libffi-dev -y
 ```
 If one of the packages cannot be found, try a newer version number (e.g. libdb5.4-dev instead of libdb5.3-dev).
+
 Download and install the latest Python 3.7 source. Select the most recent release of Python (as of writing, 3.7.2) from the official site. Adjust the file names accordingly to match your version.
 ```
  wget https://www.python.org/ftp/python/3.7.2/Python-3.7.2.tar.xz
