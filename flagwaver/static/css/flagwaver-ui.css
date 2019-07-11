@@ -24,13 +24,13 @@ body {
   background-size: cover;
 }
 
-*,
+/**,
 *:before,
 *:after {
     -webkit-box-sizing : border-box;
        -moz-box-sizing : border-box;
             box-sizing : border-box;
-}
+}*/
 
 * {
     margin  : 0;
@@ -469,11 +469,11 @@ url('img/Sky_over_Washington_Monument-1600x1200px.jpg');
   background-repeat: repeat-x;
 }
 #fog:before {
-  background-image: url('https://res.cloudinary.com/dkr52htco/image/upload/v1536173269/fog-1.png');
+  background-image: url('/static/css/img/fog-1.png');
   animation: drift 60s linear 0s infinite;
 }
 #fog:after {
-  background-image: url('https://res.cloudinary.com/dkr52htco/image/upload/v1536173269/fog-2.png');
+  background-image: url('/static/css/img/fog-2.png');
   animation: drift 25s linear 0s infinite;
 }
 @keyframes drift {
@@ -498,4 +498,18 @@ url('img/Sky_over_Washington_Monument-1600x1200px.jpg');
     opacity: 0.8;
     z-index: 10000;
 
+}
+
+#notifications {
+    cursor: pointer;
+    position: fixed;
+    right: 0px;
+    z-index: 209999;
+    top: 0px;
+    margin-bottom: 22px;
+    margin-right: 15px;
+    max-width: 300px;
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
 }

@@ -11,6 +11,20 @@
         -->
         <title>Online Flag Waver</title>
         <!-- Libraries -->
+        
+        <!-- Notify Script -->
+        <!-- Le styles -->
+<!--         <link href="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css" rel="stylesheet"> -->
+        <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet">
+        
+        <!-- Notify CSS -->
+        <link href="/static/css/bootstrap-notify.css" rel="stylesheet">
+
+        <!-- Custom Styles -->
+        <link href="/static/css/styles/alert-bangtidy.css" rel="stylesheet">
+        <link href="/static/css/styles/alert-blackgloss.css" rel="stylesheet">
+
         <link type="text/css" rel="stylesheet" href="/static/css/normalize.min.css" />
         <link type="text/css" rel="stylesheet" href="/static/css/css.css" />
         <script type="text/javascript" src="/static/js/jquery-1.11.1.min.js"></script>
@@ -28,6 +42,8 @@
         <script src="/static/js/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
         <script src="/static/js/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
         <script type="text/javascript" charset="utf-8">
+
+
         $(document).ready(function() {
             // Use a "/test" namespace.
             // An application can open a connection on multiple namespaces, and
@@ -43,7 +59,10 @@
             // The callback function is invoked when a connection with the
             // server is established.
             socket.on('connect', function() {
-                socket.emit('my_event', {data: 'I\'m connected!'});
+                socket.emit('my_event', {data: 'WebSocket Online'});
+                $('.top-right').notify({
+                    message: { text: 'WebSocket Online' }
+                  }).show();
             });
             // Event handler for server sent data.
             // The callback function is invoked whenever the server emits data
@@ -60,10 +79,11 @@
             angle = 0
             speed = 0
             socket.on('my_angle', function(msg, cb) {
+
                 //$('#serial').append('<br>' + $('<div/>').text('Received #' + msg.count + ': ' + msg.data).html());
                 //var objDiv = document.getElementById("serial");
                 //objDiv.scrollTop = objDiv.scrollHeight;
-                angle = msg.data;
+                angle = msg.data;                
                 //window.flagWaver.setWindDetails(msg.data,130);
                 //window.console.log(msg.data);
                 if (cb)
@@ -78,6 +98,43 @@
                 $("label[for='myalue2']").html(angle);
                 window.flagWaver.setWindDetails(angle,speed);
                 //window.console.log(msg.data);
+                if (cb)
+                    cb();
+            });
+            socket.on('my_disconnect', function(msg, cb) {
+                //$('#serial').append('<br>' + $('<div/>').text('Received #' + msg.count + ': ' + msg.data).html());
+                //var objDiv = document.getElementById("serial");
+                //objDiv.scrollTop = objDiv.scrollHeight;
+                if(msg.data == "1"){
+                    $("#calc").text("Connect");
+                    document.getElementById("calc").disabled = false;
+                    //document.getElementById("set-top-edge").disabled = false;
+                }
+                //window.console.log(msg.data);
+                if (cb)
+                    cb();
+            });
+            socket.on('my_ports', function(msg, cb) {
+                $('#serial').append('<br>' + $('<div/>').text('Received #' + msg.count + ': Available Ports: ' + msg.data).html());
+                //var objDiv = document.getElementById("serial");
+                //objDiv.scrollTop = objDiv.scrollHeight;
+                //angle = msg.data;
+                //window.flagWaver.setWindDetails(msg.data,130);
+                //window.console.log(msg.data);
+                items = msg.data
+                $("#set-top-edge option").remove();
+                $.each(items, function (i, item) {
+                    $('#set-top-edge').append($('<option>', { 
+                        value: item,
+                        text : item 
+                    }));
+                });
+                if (msg.data != '') {
+                    document.getElementById("set-top-edge").disabled = false;
+                    $('.top-right').notify({
+                        message: { text: 'Check Available Ports' }
+                      }).show();
+                }
                 if (cb)
                     cb();
             });
@@ -214,7 +271,7 @@
 
             <header class="page-header">
                 <h1>Flag Waver</h1>
-                <p>Async mode is: <b>{{ async_mode }}</b></p>
+               <!--  <p>Async mode is: <b>{{ async_mode }}</b></p> -->
                 <p>Average ping/pong latency: <b><span id="ping-pong"></span>ms</b></p>
                 
 
@@ -260,8 +317,8 @@
              <div id="serial" style="background-color:#00000f;width:400px;height:400px;opacity:0.5;border-radius: 5px;overflow: auto"/>
 </div>
 
-<pre id="info"></pre>
-<div id="description"></div>
+<!-- <pre id="info"></pre>
+<div id="description"></div> -->
 
 <script src="/static/jquery-3.1.1.min.js"></script>
 <script src="/static/math.js?r={{reload}}"></script>
@@ -393,8 +450,62 @@
             <p style="font-size:0.7em;float:right;"><b>Speed(MPH): </b><br/><label for="myalue1" style="vertical-align: middle"></label>
                 <br/><b>Direction(Degrees): </b><br/><label for="myalue2" style="vertical-align: middle"></label>°</p>
         </div>
+        <div class='notifications top-right'></div>
 <!--     <center><font size="2">This is the free demo result. For a full version of this website, please go to  <a href="https://www6.waybackmachinedownloader.com/website-downloader-online/scrape-all-files/">https://www6.waybackmachinedownloader.com/website-downloader-online/scrape-all-files/</a></font></center> -->
+<!-- Le javascript
+    ================================================== -->
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="/static/js/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <!-- Placed at the end of the document so the pages load faster -->
+<!--     <script src="http://twitter.github.com/bootstrap/assets/js/jquery.js"></script> -->
+<!--     <script src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script> -->
+<!--     <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-transition.js"></script> -->
+<!--     <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-alert.js"></script> -->
+    <script src="/static/js/bootstrap-notify.js"></script>
+    <script>
+      // Random Messages
+      var messages = [
+        [ 'bottom-right', 'info',     'Gah this is awesome.'],
+        [ 'top-right',    'success',  'I love Nijiko, he is my creator.' ],
+        [ 'bottom-left',  'warning',  'Soda is bad.' ],
+        [ 'top-right',  'danger',   "I'm sorry dave, I'm afraid I can't let you do that." ],
+        [ 'bottom-right', 'info',     "There are only three rules." ],
+        [ 'top-right',    'inverse',  'Do you hear me now?' ],
+        [ 'bottom-left',  'blackgloss',     'You should fork this!' ]
+      ];
 
+      // Pretty print
+      window.prettyPrint && prettyPrint()
+
+      // Basic Features, style isn't even required.
+      $('.show-notification').click(function (e) {
+        var message = messages[Math.floor(Math.random() * messages.length)];
+        
+        $('.' + message[0]).notify({
+          message: { text: message[2] },
+          type: message[1],
+          fadeOut: {
+            delay: Math.floor(Math.random() * 500) + 2500
+          }
+        }).show();
+      });
+      
+      /* Custom Styles */
+      var custom = [
+        'bangTidy',
+        'blackgloss'
+      ];
+      
+      for(var i = 0; i < custom.length; i++) {
+        var type = custom[i];
+        
+        (function(type) {
+          $('.show-' + type).click(function (e) {
+            var message = messages[Math.floor(Math.random() * messages.length)];
+            $('.' + message[0]).notify({ message: { text: message[2] }, type: type }).show();
+          });
+        })(type);
+      }
+    </script>
 
 
 </body>

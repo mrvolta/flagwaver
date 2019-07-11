@@ -1192,7 +1192,7 @@
     	WindForceZ = Math.sin(anglefinal) * 5;
     	setWindDirection(WindForceX,WindForceY,WindForceZ);
     	setWind(speed);
-        window.console.log(WindForceX + ', ' + WindForceZ);
+        //window.console.log(WindForceX + ', ' + WindForceZ);
     }
 
     function onResize () {

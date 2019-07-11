@@ -47,24 +47,73 @@ $(function() {
         $('#info').css('display', "none");
         $('#description').css('display', "none");
         //console.log(url);
-        $.ajax({
-            url : '/api/calc?a=100', //+ document.getElementById('a').value , //+ '&b=' + document.getElementById('b').value
-            success: function(data) {
-/*                $('#add').html(data['a'] + ' + ' + data['b'] + ' = ' + data['add']);
-                $('#subtract').html(data['a'] + ' - ' + data['b'] + ' = ' + data['subtract']);
-                $('#multiply').html(data['a'] + ' * ' + data['b'] + ' = ' + data['multiply']);
-                $('#divide').html(data['a'] + ' / ' + data['b'] + ' = ' + data['divide']);*/
-                console.log(data['b']);
-                $.each(data['b'], function(key, value) {   
-                     $('#set-top-edge')
-                         .append($("<option></option>")
-                                    .attr("value",key)
-                                    .text(value)); 
-                });
-                $("#serial").html(window.document.getElementById('serial').innerHTML + "<br>" + "Available ports : " + data['b']);
-                //callWind(0, data['Serial']);
-            }
-        });
+        if ($("#calc").text() == "Connect") {
+          $("#serial").html(window.document.getElementById('serial').innerHTML + "<br>" + "Conneting.............");
+          var objDiv = document.getElementById("serial");
+          objDiv.scrollTop = objDiv.scrollHeight;
+          $("#calc").text("Connecting");
+          //document.getElementById("calc").text = "Connecting";
+          document.getElementById("calc").disabled = true;
+          $.ajax({
+              url : '/api/calc?a=' + document.getElementById('set-top-edge').value, //+ document.getElementById('a').value , //+ '&b=' + document.getElementById('b').value
+              success: function(data) {
+  /*                $('#add').html(data['a'] + ' + ' + data['b'] + ' = ' + data['add']);
+                  $('#subtract').html(data['a'] + ' - ' + data['b'] + ' = ' + data['subtract']);
+                  $('#multiply').html(data['a'] + ' * ' + data['b'] + ' = ' + data['multiply']);
+                  $('#divide').html(data['a'] + ' / ' + data['b'] + ' = ' + data['divide']);*/
+                  //console.log(data['b']);
+                  //$.each(data['b'], function(key, value) {   
+                  //     $('#set-top-edge')
+                  //         .append($("<option></option>")
+                  //                    .attr("value",key)
+                  //                    .text(value)); 
+                  //});
+                  //$("#serial").html(window.document.getElementById('serial').innerHTML + "<br>" + "Available ports : " + data['b']);
+                  //callWind(0, data['Serial']);
+                  //document.getElementById("calc").text = "Disconnect";
+                    $("#calc").text("Diconnect");
+                    document.getElementById("calc").disabled = false;
+                    $('.top-right').notify({
+                      message: { text: 'Arduino is Connected, Please wait a few seconds to update' }
+                    }).show();
+
+                    
+                    //document.getElementById("set-top-edge").disabled = true;
+              }
+          });
+      }else {
+        $("#serial").html(window.document.getElementById('serial').innerHTML + "<br>" + "Disconnecting.............");
+          var objDiv = document.getElementById("serial");
+          objDiv.scrollTop = objDiv.scrollHeight;
+          $("#calc").text("Disconncting");
+          //document.getElementById("calc").text = "Connecting";
+          document.getElementById("calc").disabled = true;
+          $.ajax({
+              url : '/api/disconnect?a=100', //+ document.getElementById('a').value , //+ '&b=' + document.getElementById('b').value
+              success: function(data) {
+  /*                $('#add').html(data['a'] + ' + ' + data['b'] + ' = ' + data['add']);
+                  $('#subtract').html(data['a'] + ' - ' + data['b'] + ' = ' + data['subtract']);
+                  $('#multiply').html(data['a'] + ' * ' + data['b'] + ' = ' + data['multiply']);
+                  $('#divide').html(data['a'] + ' / ' + data['b'] + ' = ' + data['divide']);*/
+                  //console.log(data['b']);
+                  //$.each(data['b'], function(key, value) {   
+                  //     $('#set-top-edge')
+                  //         .append($("<option></option>")
+                  //                    .attr("value",key)
+                  //                    .text(value)); 
+                  //});
+                  //$("#serial").html(window.document.getElementById('serial').innerHTML + "<br>" + "Available ports : " + data['b']);
+                  //callWind(0, data['Serial']);
+                  //document.getElementById("calc").text = "Disconnect";
+
+                  $("#calc").text("Connect");
+                  document.getElementById("calc").disabled = false;
+                  $('.top-right').notify({
+                    message: { text: 'Serial Disconnected' }
+                  }).show();
+              }
+          });
+      }
     });
 })
 
