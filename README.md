@@ -1,4 +1,4 @@
-Flag Waver using 4 orthogonal wind sensors
+**Flag Waver using 4 orthogonal wind sensors**
 
 This project is an implementation of https://krikienoid.github.io/flagwaver/ using Python
 
@@ -10,10 +10,10 @@ Also, WebSocket-IO was implemented to change the user interface based on the ser
 This code can be uploaded to raspberry pi via SSH or can be used on Windows/Linux PCs
 
 
-Installation
+**Installation**
 
 You have to install python 3 on your raspberry pi
-
+```
 sudo apt-get install python3-dev libffi-dev libssl-dev -y.
 wget https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tar.xz.
 tar xJf Python-3.6.3.tar.xz.
@@ -22,13 +22,13 @@ cd Python-3.6.3.
 make.
 sudo make install.
 sudo pip3 install --upgrade pip.
-
+```
 After that , you can install this package using the following
-
+```
 pip3 install git+https://github.com/mrvolta/flagwaver
+```
 
-
-Usage
+**Usage**
 
 You will find examples in the "examples" folder as follows:
 
@@ -39,9 +39,9 @@ Detailed.py - Implementing the same previous concept, except you can actually vi
 
 Simulated.py - Here you can run the code without the need for arduino serial communication to be active , because it's simulating the data
 
-Arduino Code
+**Arduino Code**
 
-
+```
 void setup() {
   // initialize serial communication at 9600 bits per second:
   Serial.begin(115200);
@@ -132,3 +132,4 @@ int getIndexOfMaximumValue(int* array, int size){
  }
  return maxIndex;
 }
+```
