@@ -43,7 +43,12 @@ sudo pip3 install --upgrade pip.
 ```
 -----------------------
 
-After that , you can install our package using the following
+After that , Make sure you have git installed on your raspbian OS
+```
+sudo apt-get install git
+```
+
+Then you can install our package using the following
 ```
 pip3 install git+https://github.com/mrvolta/flagwaver
 ```
@@ -58,6 +63,8 @@ via "arduino" class and conduct some calculations , producing the wind speed and
 Detailed.py - Implementing the same previous concept, except you can actually view some deeper python code
 
 Simulated.py - Here you can run the code without the need for arduino serial communication to be active , because it's simulating the data
+
+![alt text](https://github.com/mrvolta/flagwaver/blob/master/flagwaver/potschematic.png)
 
 # **Arduino Code**
 
