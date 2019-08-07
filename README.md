@@ -43,7 +43,12 @@ sudo pip3 install --upgrade pip.
 ```
 -----------------------
 
-After that , you can install our package using the following
+After that , Make sure you have git installed on your raspbian OS
+```
+sudo apt-get install git
+```
+
+Then you can install our package using the following
 ```
 pip3 install git+https://github.com/mrvolta/flagwaver
 ```
