@@ -53,6 +53,14 @@ Then you can install our package using the following
 pip3 install git+https://github.com/mrvolta/flagwaver
 ```
 
+**Important Notice**
+Please make sure that you enable the OpenGL library as the following :
+```
+Open a terminal
+Type sudo raspi-config
+Find the display options, set the driver to option 1 or 2
+```
+
 # **Usage**
 
 You will find examples in the "examples" folder as follows:
