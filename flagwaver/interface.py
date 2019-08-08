@@ -11,9 +11,9 @@ from flask import Flask, render_template, session, request, \
 from flask_socketio import SocketIO, emit, join_room, leave_room, \
     close_room, rooms, disconnect
 import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.patches as patches
-import matplotlib.animation as animation
+#import matplotlib.pyplot as plt
+#import matplotlib.patches as patches
+#import matplotlib.animation as animation
 import math
 import random
 import requests

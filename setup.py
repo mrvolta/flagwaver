@@ -12,7 +12,6 @@ setup(
         'flask_socketio',
         'pyserial',
         'numpy',
-        'matplotlib',
         'requests',
 
     ],
