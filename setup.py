@@ -11,7 +11,6 @@ setup(
         'flask',
         'flask_socketio',
         'pyserial',
-        'numpy',
         'requests',
 
     ],
